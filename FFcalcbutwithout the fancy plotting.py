@@ -110,9 +110,12 @@ def Form_factor_to_matter_radii_rms(Fq):
     return rms_matter_radius
 
 """
-def form_factor_to_rms(Fq):
-    RhoR = 
-
+def form_factor_to_rms(Fq, q):
+    integrand = q^2 * Fq * spherical_jn(0, q * r)
+    fraction_bottom=(2* (np.pi**2))
+    fraction = 1/fraction_bottom 
+    result = fraction* np.trapz(integrand, q)
+    
 
 
 """
@@ -172,3 +175,4 @@ while True:
         break  # Exit if dialog closed without selection or user clicked Quit
 
 """
+
