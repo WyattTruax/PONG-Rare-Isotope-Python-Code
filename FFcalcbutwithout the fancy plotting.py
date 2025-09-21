@@ -93,7 +93,7 @@ def compute_form_factor(q_vals, rho_r, r):
     Fq /= F0
     return Fq
 
-
+""" #this is wrong but its what I did
 def Form_factor_to_matter_radii_rms(Fq):
     rho_real = []
     rho_real_squared = []
@@ -109,8 +109,9 @@ def Form_factor_to_matter_radii_rms(Fq):
     rms_matter_radius = np.sqrt(divided_rho_squared)
     return rms_matter_radius
 
-
-
+"""
+def form_factor_to_rms(Fq):
+    RhoR = 
 
 
 
@@ -169,4 +170,5 @@ while True:
         current_isotope_index = names.index(selected_name)
     else:
         break  # Exit if dialog closed without selection or user clicked Quit
+
 """
