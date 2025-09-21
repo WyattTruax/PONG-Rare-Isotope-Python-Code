@@ -110,12 +110,23 @@ def Form_factor_to_matter_radii_rms(Fq):
     return rms_matter_radius
 
 """
-def form_factor_to_rms(Fq, q):
-    integrand = q^2 * Fq * spherical_jn(0, q * r)
-    fraction_bottom=(2* (np.pi**2))
-    fraction = 1/fraction_bottom 
-    result = fraction* np.trapz(integrand, q)
+def fq_to_rho_to_RMS(Fq, q_vals, r_max=10, n_r=1000):
+    r_vals = np.linspace(0, r_max, n_r)
+    rho = []
     
+    # Compute rho(r) by inverse transform
+    for r in r_vals:
+        integrand = q_vals**2 * Fq * spherical_jn(0, q_vals * r)
+        rho_r = (1/(2*np.pi**2)) * np.trapz(integrand, q_vals)
+        rho.append(rho_r)
+    rho = np.array(rho)
+    
+    # Compute RMS radius
+    numerator = np.trapz(r_vals**4 * rho, r_vals)
+    denominator = np.trapz(r_vals**2 * rho, r_vals)
+    rms = np.sqrt(numerator / denominator)
+    
+    return rms, r_vals, rho
 
 
 """
@@ -175,4 +186,5 @@ while True:
         break  # Exit if dialog closed without selection or user clicked Quit
 
 """
+
 
