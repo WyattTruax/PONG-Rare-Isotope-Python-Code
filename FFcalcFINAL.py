@@ -4,7 +4,7 @@ from matplotlib.widgets import Button
 from scipy.special import spherical_jn
 import tkinter as tk
 
-# -- Your isotope data and functions (same as before) --
+# Your isotope data and functions (same as before)
 
 # Isotope data
 isotopes = [
@@ -101,7 +101,15 @@ def compute_form_factor(q_vals, rho_r, r):
     Fq /= F0
     return Fq
 
-# --- Plot setup ---
+def calc_limit_at_0(ff, qvals, r):
+    print(ff[0])
+    print(ff[1])
+
+    # deriv = abs(deriv)
+    # r_rms = np.sqrt(deriv)
+    # print(r_rms)
+
+# Plot setup
 fig, ax = plt.subplots(figsize=(8,6))
 plt.subplots_adjust(bottom=0.3)
 
@@ -115,6 +123,7 @@ def update_plot():
     rho = fermi_density(r, R0, a_charge, rho0)
     F_q = compute_form_factor(Q_values[0], rho, r)
     ax.plot(Q_values[0], np.abs(F_q), label=f"{name}")
+    calc_limit_at_0(F_q, Q_values[0], r)
     ax.semilogy()
     ax.set_title(f"{name} | RMS Radius = {r_rms:.3f} fm", fontsize=15)
     ax.set_xlabel("Momentum Transfer $q$ [fm$^{-1}$]", fontsize=15)
@@ -124,7 +133,7 @@ def update_plot():
     ax.legend(fontsize=25)
     fig.canvas.draw_idle()
 
-# --- Tkinter popup for isotope selection ---
+# Tkinter popup for isotope selection
 def select_isotope_dialog():
     root = tk.Tk()
     root.title("Select Isotope")
@@ -169,7 +178,7 @@ def select_isotope_dialog():
     
     return root.selected
 
-# --- Matplotlib button to open the Tkinter popup ---
+# Matplotlib button to open the Tkinter popup
 button_ax = plt.axes([0.4, 0.05, 0.2, 0.075])
 button = Button(button_ax, 'Select Isotope', color='lightgreen', hovercolor='green')
 
