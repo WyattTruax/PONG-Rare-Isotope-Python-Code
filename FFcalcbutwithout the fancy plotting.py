@@ -59,8 +59,8 @@ isotopes = [
     ("Nickel-58", 28, 58, 3.772),
 ]
 
-Q_values = [np.linspace(0, 2, 1000)]
-r_max = 30  # fm
+Q_values = [np.linspace(0, 2, 10000)]
+r_max = 15  # fm
 r = np.linspace(1e-5, r_max, 5000)
 a_charge = 0.53  # fm
 
@@ -99,7 +99,7 @@ def Form_factor_to_matter_radii_rms(Fq):
     rho_real_squared = []
     for i, q in enumerate(q_vals):  # Loop with index
         integrand = r**2 * spherical_jn(0, r*q)  # Only the spherical Bessel function, no Fq[i]
-        result = 4 * np.pi * np.trapz(integrand, r)
+        result = 4 * np.pi * np. trapz (integrand, r)
         rho_real.append(result)
     for rho in rho_real:
         square = rho**2
@@ -117,19 +117,22 @@ def fq_to_rho_to_RMS(Fq, q_vals, r_max=10, n_r=1000):
     # Compute rho(r) by inverse transform
     for r in r_vals:
         integrand = q_vals**2 * Fq * spherical_jn(0, q_vals * r)
-        rho_r = (1/(2*np.pi**2)) * np.trapz(integrand, q_vals)
+        rho_r = (1/(2*np.pi**2)) * np.trapezoid(integrand, q_vals)
         rho.append(rho_r)
     rho = np.array(rho)
     
     # Compute RMS radius
-    numerator = np.trapz(r_vals**4 * rho, r_vals)
-    denominator = np.trapz(r_vals**2 * rho, r_vals)
+    numerator = np.trapezoid(r_vals**4 * rho, r_vals)
+    denominator = np.trapezoid(r_vals**2 * rho, r_vals)
+    print("Numerator:", numerator)
+    print("Denominator:", denominator)
+
     rms = np.sqrt(numerator / denominator)
-    
+    print(rms)
     return rms, r_vals, rho
 
 
-"""
+
 fig, ax = plt.subplots(figsize=(8,6))
 plt.subplots_adjust(bottom=0.3, left=0.3)
 
@@ -150,6 +153,7 @@ def update_plot():
     ax.grid(True, linestyle='--', alpha=0.6)
     ax.legend()
     fig.canvas.draw_idle()
+    fq_to_rho_to_RMS(F_q, Q_values[0], r_max=10, n_r=1000)
 
 def select_isotope_dialog():
     dialog = tk.Tk()
@@ -184,7 +188,3 @@ while True:
         current_isotope_index = names.index(selected_name)
     else:
         break  # Exit if dialog closed without selection or user clicked Quit
-
-"""
-
-
