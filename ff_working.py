@@ -1,7 +1,9 @@
 # Running corrected script and showing plots + printed RMS radii per isotope.
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.widgets import Button
 from scipy.special import spherical_jn
+import tkinter as tk
 
 # --- Cleaned constants and parameters ---
 rho0_matter = 0.17   # nucleons/fm^3 (comment cleaned)
@@ -84,7 +86,7 @@ plt.tight_layout()
 plt.show()
 
 # compute form factors and RMS and optionally plot form factors
-q_vals = np.linspace(0.001, 4.0, 300)  # fm^-1
+q_vals = np.linspace(0.001, 5.0, 3000)  # fm^-1
 plt.figure(figsize=(10,5))
 for name, Z, A in isotopes:
     R0_matter = 1.31 * A**(1/3) - 0.84
@@ -101,6 +103,7 @@ for name, Z, A in isotopes:
 
 plt.xlabel("q [fm^-1]")
 plt.ylabel("Normalized form factor F(q)")
+plt.yscale("log")
 plt.grid(True, linestyle='--', alpha=0.6)
 plt.legend()
 plt.title("Normalized Matter Form Factors")
