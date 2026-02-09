@@ -6,6 +6,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from scipy.special import spherical_jn
 from tkinter import font
 import isotopes
+import AIEA_isotopes
 
 # =========================
 # Physics Functions
@@ -43,6 +44,9 @@ def compute_form_factor(q_vals, rho_r, r):
 
     Fq = np.array(Fq) / F0
     return Fq
+
+def AIEA_sigma(r_rms, AIEA_rms):
+    return ((r_rms - AIEA_rms) / AIEA_rms) * 100
 
 # =========================
 # GUI Application
@@ -134,15 +138,18 @@ class IsotopeViewer(tk.Tk):
 
     def update_plot(self, index):
         name, Z, A, r_rms = isotopes.isotopes[index]
+        name, AIEA_rms = AIEA_isotopes.AIEA_iso[index]
 
         R0 = R0_from_rms(r_rms)
         rho0 = compute_rho0(r, R0, a_charge, Z)
         rho = fermi_density(r, R0, a_charge, rho0)
         Fq = compute_form_factor(Q_values, rho, r)
+        pct_err = AIEA_sigma(r_rms, AIEA_rms) # comment out to remove AIEA comparison calculation
 
         self.ax.clear()
         self.ax.plot(Q_values, np.abs(Fq), label=name)
-        self.ax.set_title(f"{name} | RMS = {r_rms:.3f} fm", pad=14)
+        #self.ax.set_title(f"{name} | RMS = {r_rms:.3f} fm ", pad=14) # title WITHOUT AIEA comparison
+        self.ax.set_title(f"{name} | RMS = {r_rms:.3f} fm | Pct Err = {pct_err:.3f}", pad=14) # title WITH AIEA comparison
         self.ax.set_xlabel("Momentum Transfer q [fm⁻¹]")
         self.ax.set_ylabel("|F(q)|")
         #self.ax.set_ylim(1e-4, 1.05)
