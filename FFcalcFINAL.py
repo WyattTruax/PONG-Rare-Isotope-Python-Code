@@ -13,7 +13,7 @@ import AIEA_isotopes
 # =========================
 Q_values = np.linspace(1e-5, 5, 1000)
 r = np.linspace(1e-5, 30, 5000)
-a_charge = 0.53
+a_charge = 0.53 #0.56 for matter
 
 def R0_from_rms(r_rms):
     term = (5/3) * r_rms**2
