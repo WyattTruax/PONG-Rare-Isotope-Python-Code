@@ -1,11 +1,13 @@
-# Running corrected script and showing plots + printed RMS radii per isotope.
+# write code summary
+# include references here
+
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.widgets import Button
 from scipy.special import spherical_jn
 import tkinter as tk
 
-# --- Cleaned constants and parameters ---
+# Cleaned constants and parameters
 rho0_matter = 0.17   # nucleons/fm^3 (comment cleaned)
 rho0_charge = 0.08   # protons/fm^3
 a_matter = 0.56      # fm
