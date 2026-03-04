@@ -1,6 +1,15 @@
-# write code summary
-# include references here
+#############
+# Wyatt Truax, Connor Taleb
+# wyatt@putyouremail.here (or 508-974-2085), connortaleb@gmail.com (or 847-691-3216)
+# date goes here
+# Final_name.py
+# this program finds Form Factor using either a wood's saxon distribution or a gaussian distribution and the PWBA
+# download the associated files from the github. we gotta add these
 
+#gotta add references here
+##############
+
+#-------------------
 import numpy as np
 import tkinter as tk
 from tkinter import ttk
