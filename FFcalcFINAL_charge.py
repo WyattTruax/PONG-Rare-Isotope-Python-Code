@@ -28,9 +28,6 @@ Q_values = np.linspace(1e-5, 8, 1000)
 rand_radii_global = np.linspace(1e-5, 12, 5000)
 a_charge = 0.53
 
-# **************************
-# new calculations after 50% error fiasco
-# **************************
 
 def calc_gaussian_density(r_rms, Z, rand_radii):
     a = np.sqrt(2/3) * r_rms
