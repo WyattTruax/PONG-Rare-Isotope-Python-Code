@@ -4,7 +4,7 @@
 # date goes here
 # Final_name.py
 # this program finds Form Factor using either a wood's saxon distribution or a gaussian distribution and the PWBA
-# download the associated files from the github. we gotta add these
+# download the associated files from the github
 
 #gotta add references here
 ##############
