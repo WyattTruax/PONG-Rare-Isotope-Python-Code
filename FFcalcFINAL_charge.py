@@ -4,7 +4,7 @@
 # date goes here
 # Final_name.py
 # this program finds Form Factor using either a wood's saxon distribution or a gaussian distribution and the PWBA
-# download the associated files from the github
+# download the associated files from the github: https://github.com/WyattTruax/PONG-Rare-Isotope-Python-Code
 
 #gotta add references here
 ##############
